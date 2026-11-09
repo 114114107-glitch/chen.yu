@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --------------------------------------------------
-         * Internal CSS - 品牌色系與全域設定
-         * -------------------------------------------------- */
         :root {
             --primary-color: #0d3b66;     /* 慈濟深藍 */
             --primary-light: #1d568c;
@@ -225,9 +222,7 @@
             font-weight: 300;
         }
 
-        /* --------------------------------------------------
-         * 首頁大照片展示區 (1 張照片)
-         * -------------------------------------------------- */
+        /* 首頁大照片展示區 (1 張照片) */
         .home-photo-section {
             padding: 40px 0;
         }
@@ -296,7 +291,7 @@
             font-size: 0.95rem;
         }
 
-        /* History & Vision Section (Tabs) */
+        /* History & Vision Section */
         .about-section {
             background-color: var(--white);
         }
@@ -456,7 +451,7 @@
             font-weight: 500;
         }
 
-        /* Partners / Affiliates */
+        /* Partners Section */
         .partners-section {
             background-color: var(--white);
         }
@@ -488,7 +483,7 @@
 
         .partner-box i { font-size: 1.8rem; }
 
-        /* Footer & Contact */
+        /* Footer */
         footer {
             background-color: var(--primary-color);
             color: var(--white);
@@ -609,6 +604,7 @@
             </div>
             <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="active">系所簡介</a>
+                <!-- 超連結連至 studentworks.html -->
                 <a href="studentworks.html">學生作品</a>
                 <a href="#facilities">教學與實習場域</a>
                 <a href="#partners">合作夥伴</a>
@@ -626,7 +622,7 @@
         </div>
     </section>
 
-    <!-- 首頁大照片 (1 張照片) -->
+    <!-- 首頁 1 張照片區 (請在 graph/ 資料夾放 home-photo.jpg) -->
     <section class="container home-photo-section">
         <div class="home-photo-wrapper">
             <img src="graph/home-photo.jpg" alt="首頁封面照片">
@@ -673,7 +669,6 @@
                     <button class="tab-btn" onclick="switchTab(event, 'history')">本系沿革</button>
                 </div>
 
-                <!-- Tab 1: Vision -->
                 <div id="vision" class="tab-content active">
                     <div style="max-width: 800px; margin: 0 auto; text-align: center;">
                         <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.5rem;">專業、利他、創新、永續</h3>
@@ -686,7 +681,6 @@
                     </div>
                 </div>
 
-                <!-- Tab 2: History -->
                 <div id="history" class="tab-content">
                     <div class="timeline">
                         <div class="timeline-item">
@@ -723,7 +717,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -780,7 +773,7 @@
         </div>
     </section>
 
-    <!-- Partners / External Links -->
+    <!-- Partners -->
     <section class="section-padding partners-section" id="partners">
         <div class="container">
             <div class="section-title">
@@ -843,7 +836,6 @@
         </div>
     </footer>
 
-    <!-- Internal JavaScript -->
     <script>
         function switchTab(evt, tabId) {
             const tabContents = document.querySelectorAll('.tab-content');
