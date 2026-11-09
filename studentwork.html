@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慈濟大學 經營管理學系 - 學生作品</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #0d3b66;     /* 慈濟深藍 */
+            --primary-light: #1d568c;
+            --accent-color: #2a9d8f;      /* 人文靜謐綠 */
+            --accent-light: #e8f5e9;
+            --secondary-color: #e9c46a;   /* 溫暖金黃 */
+            --bg-light: #f8f9fa;
+            --text-main: #2b2d42;
+            --text-muted: #6c757d;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(13, 59, 102, 0.2);
+        }
+
+        .logo-text h1 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-main);
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* 2張純照片展示區 */
+        main {
+            flex-grow: 1;
+            padding: 60px 0;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 60px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-col p, .footer-col li {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .footer-col i {
+            width: 25px;
+            color: var(--secondary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow-md);
+            }
+
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .image-gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container navbar">
+            <!-- 超連結點擊標誌可回到 index.html -->
+            <a href="index.html" class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>慈濟大學 經營管理學系</h1>
+                    <span>Department of Business Management, TCU</span>
+                </div>
+            </a>
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <nav class="nav-links" id="navLinks">
+                <!-- 超連結點擊「系所簡介」可連回 index.html -->
+                <a href="index.html">系所簡介</a>
+                <a href="studentworks.html" class="active">學生作品</a>
+                <a href="index.html#facilities">教學與實習場域</a>
+                <a href="index.html#partners">合作夥伴</a>
+                <a href="index.html#contact">聯絡我們</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area (請在 graph/ 資料夾放 work1.jpg 與 work2.jpg) -->
+    <main>
+        <div class="container">
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="graph/work1.jpg" alt="作品照片 1" class="gallery-img">
+                </div>
+                <div class="gallery-item">
+                    <img src="graph/work2.jpg" alt="作品照片 2" class="gallery-img">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>慈濟大學 經營管理學系</h3>
+                    <p>Department of Business Management, TCU</p>
+                    <p style="margin-top: 15px;">培養具備專業力、道德力與永續觀的未來管理精英。</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>聯絡資訊</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-location-dot"></i> 地址：花蓮市介仁街67號</li>
+                        <li><i class="fa-solid fa-phone"></i> 電話：03-857-2677 #31682</li>
+                        <li><i class="fa-solid fa-envelope"></i> 信箱：ss62@gms.tcu.edu.tw</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>個人資料保護窗口</h3>
+                    <p>主任：林珍如 主任</p>
+                    <p>電話：03-857-2677 #33126</p>
+                    <p>信箱：lih5374@gms.tcu.edu.tw</p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@_tcust5687" target="_blank" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 慈濟大學經營管理學系 版權所有 | Tzu Chi University. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
