@@ -55,6 +55,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+            width: 100%;
         }
 
         .section-padding {
@@ -176,6 +177,24 @@
             width: 100%;
         }
 
+        .nav-btn-works {
+            background: var(--accent-color);
+            color: var(--white) !important;
+            padding: 8px 20px !important;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(42, 157, 143, 0.25);
+        }
+
+        .nav-btn-works::after {
+            display: none !important;
+        }
+
+        .nav-btn-works:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
         .mobile-menu-btn {
             display: none;
             font-size: 1.5rem;
@@ -183,23 +202,76 @@
             cursor: pointer;
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(13, 59, 102, 0.92), rgba(42, 157, 143, 0.85));
-            color: var(--white);
-            padding: 80px 0 65px;
-            text-align: center;
+        /* --------------------------------------------------
+         * Hero 滿版背景輪播橫幅（文字與按鈕浮現於輪播照片上方）
+         * -------------------------------------------------- */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            overflow: hidden;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
         }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
+        /* 背景照片軌道 */
+        .hero-slides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 1;
+        }
+
+        .hero-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 左深右透的漸層遮罩，確保左側文字清晰可讀、右側展現完整照片 */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                rgba(13, 59, 102, 0.90) 0%,
+                rgba(13, 59, 102, 0.72) 45%,
+                rgba(13, 59, 102, 0.22) 100%
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* 浮在照片上的左側文字與按鈕區 */
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 3;
+            color: var(--white);
+        }
+
+        .hero-text-box {
+            max-width: 600px;
+            text-align: left;
         }
 
         .hero-tag {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
+            background: rgba(42, 157, 143, 0.85);
+            color: var(--white);
             padding: 6px 18px;
             border-radius: 30px;
             font-size: 0.9rem;
@@ -208,102 +280,110 @@
             letter-spacing: 1px;
         }
 
-        .hero h1 {
-            font-size: 2.8rem;
+        .hero-text-box h1 {
+            font-size: 2.75rem;
             font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.3;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.25);
         }
 
-        .hero p {
-            font-size: 1.15rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
+        .hero-text-box p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 32px;
             font-weight: 300;
+            line-height: 1.8;
         }
 
-        /* --------------------------------------------------
-         * 首頁滿版橫幅輪播區 (Banner Carousel)
-         * -------------------------------------------------- */
-        .banner-carousel {
-            position: relative;
-            width: 100%;
-            height: 480px;
-            overflow: hidden;
-            background-color: #1a2634;
-            box-shadow: var(--shadow-md);
-        }
-
-        .carousel-slides {
+        .hero-buttons {
             display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
+        .btn-primary-hero {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 12px 26px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(42, 157, 143, 0.4);
         }
 
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        .btn-primary-hero:hover {
+            background-color: #23867a;
+            transform: translateY(-2px);
         }
 
-        /* 左右切換按鈕 */
+        .btn-secondary-hero {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            color: var(--white);
+            padding: 12px 26px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-secondary-hero:hover {
+            background: rgba(255, 255, 255, 0.28);
+            transform: translateY(-2px);
+        }
+
+        /* 左右切換箭頭 */
         .carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(13, 59, 102, 0.55);
+            background: rgba(255, 255, 255, 0.2);
             color: var(--white);
-            border: none;
-            width: 48px;
-            height: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            z-index: 10;
+            z-index: 4;
             backdrop-filter: blur(4px);
         }
 
         .carousel-btn:hover {
             background: var(--accent-color);
-            transform: translateY(-50%) scale(1.08);
+            border-color: var(--accent-color);
         }
 
-        .carousel-btn.prev {
-            left: 24px;
-        }
-
-        .carousel-btn.next {
-            right: 24px;
-        }
+        .carousel-btn.prev { left: 20px; }
+        .carousel-btn.next { right: 20px; }
 
         /* 底部圓點指示器 */
         .carousel-dots {
             position: absolute;
-            bottom: 20px;
+            bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
-            z-index: 10;
+            z-index: 4;
         }
 
         .carousel-dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.45);
             border: none;
             cursor: pointer;
             transition: var(--transition);
@@ -317,7 +397,7 @@
 
         /* Core Highlights */
         .features {
-            margin-top: 50px;
+            margin-top: 60px;
         }
 
         .feature-grid {
@@ -367,6 +447,7 @@
         /* History & Vision Section */
         .about-section {
             background-color: var(--white);
+            margin-top: 60px;
         }
 
         .tabs-container {
@@ -644,12 +725,13 @@
 
             .nav-links.active { display: flex; }
             .mobile-menu-btn { display: block; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1rem; }
-            .banner-carousel { height: 280px; }
-            .carousel-btn { width: 38px; height: 38px; font-size: 1rem; }
-            .carousel-btn.prev { left: 12px; }
-            .carousel-btn.next { right: 12px; }
+            .hero-banner { height: 500px; }
+            .hero-overlay {
+                background: rgba(13, 59, 102, 0.78);
+            }
+            .hero-text-box h1 { font-size: 2rem; }
+            .hero-text-box p { font-size: 1rem; }
+            .carousel-btn { display: none; }
             .timeline::before { left: 20px; }
             .timeline-item {
                 width: 100%;
@@ -681,38 +763,47 @@
             </div>
             <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="active">系所簡介</a>
-                <a href="studentworks.html">學生作品</a>
-                <a href="#facilities">教學與實習場域</a>
+                <a href="#features">本系特色</a>
+                <a href="#facilities">專業教室</a>
                 <a href="#partners">合作夥伴</a>
                 <a href="#contact">聯絡我們</a>
+                <a href="studentworks.html" class="nav-btn-works"><i class="fa-solid fa-graduation-cap"></i> 學生作品</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <span class="hero-tag">慈濟大學 經營管理學系</span>
-            <h1>培育具備人文素養與國際視野的經營管理人才</h1>
-            <p>結合個案教學、翻轉教育、智慧零售與知足咖啡館實務經驗，打造兼具理論與實務的學習環境。</p>
-        </div>
-    </section>
-
-    <!-- 滿版橫幅輪播區 (請在 graph/ 資料夾放置 home-photo.jpg、home-photo2.jpg、home-photo3.jpg) -->
-    <section class="banner-carousel" id="bannerCarousel">
-        <div class="carousel-slides" id="carouselSlides">
-            <div class="carousel-slide">
-                <img src="graph/home-photo.jpg" alt="橫幅照片 1">
+    <!-- 滿版橫幅輪播區（照片作為背景持續輪換，文字與按鈕覆蓋於左側） -->
+    <section class="hero-banner" id="bannerCarousel">
+        <!-- 背景輪播圖片 -->
+        <div class="hero-slides" id="carouselSlides">
+            <div class="hero-slide">
+                <img src="graph/home-photo.jpg" onerror="this.onerror=null; this.src='graph/home-photo.JPG';" alt="橫幅照片 1">
             </div>
-            <div class="carousel-slide">
-                <img src="graph/home-photo2.jpg" alt="橫幅照片 2">
+            <div class="hero-slide">
+                <img src="graph/home-photo2.jpg" onerror="this.onerror=null; this.src='graph/home-photo2.JPG';" alt="橫幅照片 2">
             </div>
-            <div class="carousel-slide">
-                <img src="graph/home-photo3.jpg" alt="橫幅照片 3">
+            <div class="hero-slide">
+                <img src="graph/home-photo3.jpg" onerror="this.onerror=null; this.src='graph/home-photo3.JPG';" alt="橫幅照片 3">
             </div>
         </div>
 
-        <!-- 左右切換按鈕 -->
+        <!-- 漸層遮罩 -->
+        <div class="hero-overlay"></div>
+
+        <!-- 浮現於照片之上的文字與按鈕 -->
+        <div class="container hero-content-wrapper">
+            <div class="hero-text-box">
+                <span class="hero-tag">慈濟大學 經營管理學系</span>
+                <h1>培育具備人文素養與國際視野的經營管理人才</h1>
+                <p>結合個案教學、翻轉教育、智慧零售與知足咖啡館實務經驗，打造兼具理論與實務的學習環境。</p>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn-primary-hero">探索本系 <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="studentworks.html" class="btn-secondary-hero"><i class="fa-solid fa-layer-group"></i> 瀏覽學生作品</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 左右切換箭頭 -->
         <button class="carousel-btn prev" id="prevBtn" aria-label="上一張">
             <i class="fa-solid fa-chevron-left"></i>
         </button>
@@ -729,7 +820,7 @@
     </section>
 
     <!-- Core Highlights -->
-    <section class="container features">
+    <section class="container features" id="features">
         <div class="feature-grid">
             <div class="feature-card">
                 <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
@@ -963,10 +1054,10 @@
         });
 
         // --------------------------------------------------
-        // 滿版橫幅自動輪播腳本
+        // 滿版橫幅背景自動輪播腳本
         // --------------------------------------------------
         const slidesContainer = document.getElementById('carouselSlides');
-        const slides = document.querySelectorAll('.carousel-slide');
+        const slides = document.querySelectorAll('.hero-slide');
         const dots = document.querySelectorAll('.carousel-dot');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
@@ -1021,7 +1112,7 @@
             });
         });
 
-        // 滑鼠移入橫幅時暫停輪播，移開後繼續
+        // 滑鼠移入時暫停輪播，移開後繼續
         carousel.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
         carousel.addEventListener('mouseleave', startAutoPlay);
 
