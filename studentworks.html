@@ -58,20 +58,131 @@
         .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--primary-color); cursor: pointer; }
 
         /* Page Header */
-        .page-header { background: linear-gradient(135deg, rgba(13, 59, 102, 0.94), rgba(42, 157, 143, 0.88)); color: var(--white); padding: 60px 0 50px; text-align: center; }
+        .page-header { background: linear-gradient(135deg, rgba(13, 59, 102, 0.94), rgba(42, 157, 143, 0.88)); color: var(--white); padding: 55px 0 45px; text-align: center; }
         .page-tag { display: inline-block; background: rgba(255, 255, 255, 0.2); padding: 5px 16px; border-radius: 30px; font-size: 0.85rem; margin-bottom: 14px; letter-spacing: 1px; }
         .page-header h1 { font-size: 2.3rem; font-weight: 700; margin-bottom: 12px; }
         .page-header p { font-size: 1.05rem; opacity: 0.9; max-width: 650px; margin: 0 auto; font-weight: 300; }
 
+        /* 焦點作品自動輪播區（每 10 秒自動切換） */
+        .featured-carousel-section {
+            margin: 45px auto 20px;
+        }
+        .featured-carousel {
+            position: relative;
+            width: 100%;
+            height: 440px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            background-color: #1d2b3a;
+        }
+        .featured-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .featured-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .featured-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .featured-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(13, 59, 102, 0.92));
+            color: var(--white);
+            padding: 50px 35px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .featured-caption h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .featured-caption p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        .featured-tag {
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(4px);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        .carousel-arrow:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        .carousel-arrow.prev { left: 18px; }
+        .carousel-arrow.next { right: 18px; }
+        .carousel-indicators {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.45);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .indicator-dot.active {
+            background: var(--white);
+            width: 26px;
+            border-radius: 5px;
+        }
+
         /* Filter & Gallery */
-        main { flex-grow: 1; padding: 55px 0 80px; }
-        .filter-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 45px; }
+        main { flex-grow: 1; padding: 35px 0 80px; }
+        .filter-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
         .filter-btn { background: var(--white); color: var(--text-main); border: 1.5px solid #e2e8f0; padding: 10px 24px; border-radius: 30px; font-size: 0.98rem; font-weight: 600; cursor: pointer; transition: var(--transition); box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 8px; }
         .filter-btn:hover { border-color: var(--accent-color); color: var(--accent-color); transform: translateY(-2px); }
         .filter-btn.active { background: var(--primary-color); color: var(--white); border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(13, 59, 102, 0.25); }
 
         .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 35px; }
-        .work-card { background: var(--white); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); display: flex; flex-direction: column; animation: fadeUp 0.45s ease forwards; }
+        .work-card { background: var(--white); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); display: flex; flex-direction: column; animation: fadeUp 0.45s ease forwards; cursor: pointer; }
         .work-card.hidden { display: none; }
         .work-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -92,6 +203,52 @@
         .empty-notice h3 { color: var(--primary-color); margin-bottom: 8px; font-size: 1.25rem; }
         .empty-notice p { color: var(--text-muted); font-size: 0.95rem; }
 
+        /* 燈箱放大預覽 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(13, 27, 42, 0.92);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox-content {
+            max-width: 900px;
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        .lightbox-content img {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            background: #111;
+            display: block;
+        }
+        .lightbox-info { padding: 20px 28px; }
+        .lightbox-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.6);
+            color: var(--white);
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         /* Footer */
         footer { background-color: var(--primary-color); color: var(--white); padding: 60px 0 20px; margin-top: auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
@@ -109,6 +266,9 @@
             .nav-links.active { display: flex; }
             .mobile-menu-btn { display: block; }
             .page-header h1 { font-size: 1.85rem; }
+            .featured-carousel { height: 280px; }
+            .featured-caption { padding: 30px 20px 18px; }
+            .featured-caption h2 { font-size: 1.15rem; }
             .works-grid { grid-template-columns: 1fr; }
             .card-image-wrapper { height: 240px; }
         }
@@ -142,6 +302,41 @@
             <span class="page-tag">學習歷程與實務展現</span>
             <h1>學生作品與學習紀錄</h1>
             <p>呈現經營管理學系學生在課程實作、團隊討論與校外企業參訪中的多元學習成果</p>
+        </div>
+    </section>
+
+    <!-- 精選學生作品自動輪播區（每 10 秒自動切換下一張） -->
+    <section class="container featured-carousel-section">
+        <div class="featured-carousel" id="worksCarousel">
+            <div class="featured-track" id="worksTrack">
+                <!-- 輪播第 1 張：course-1.jpg -->
+                <div class="featured-slide">
+                    <img src="graph/course-1.jpg" onerror="this.onerror=null; this.src='graph/course-1.JPG';" alt="課程成果 1">
+                    <div class="featured-caption">
+                        <div>
+                            <span class="featured-tag">課程成果</span>
+                            <h2>經營管理專題實作成果展示</h2>
+                            <p>結合課程所學之管理理論與實務應用，展現學生在商品企劃與創新思維上的精彩成果。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 輪播第 2 張：visit-1.jpg -->
+                <div class="featured-slide">
+                    <img src="graph/visit-1.jpg" onerror="this.onerror=null; this.src='graph/visit-1.JPG';" alt="校外參訪 1">
+                    <div class="featured-caption">
+                        <div>
+                            <span class="featured-tag">校外參訪</span>
+                            <h2>在地場域與企業實務參訪交流</h2>
+                            <p>走出教室深入在地特色空間與產業現場，將課堂理論與實務營運緊密結合。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-arrow prev" id="carouselPrev" aria-label="上一張"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="carousel-arrow next" id="carouselNext" aria-label="下一張"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="carousel-indicators" id="carouselIndicators"></div>
         </div>
     </section>
 
@@ -185,7 +380,7 @@
 
                 <!-- 
                 ====================================================================
-                📌 未來新增照片快速範本（上傳 group-1.jpg、course-2.jpg 等後複製使用）：
+                📌 未來新增照片快速範本（上傳 group-1.jpg、course-2.jpg 等後複製貼上）：
                 ====================================================================
                 <div class="work-card" data-category="group">
                     <div class="card-image-wrapper">
@@ -209,6 +404,18 @@
             </div>
         </div>
     </main>
+
+    <!-- 點擊卡片放大檢視燈箱 -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="關閉"><i class="fa-solid fa-xmark"></i></button>
+            <img id="lightboxImg" src="" alt="作品放大預覽">
+            <div class="lightbox-info">
+                <h3 id="lightboxTitle" style="color: var(--primary-color); margin-bottom: 6px;"></h3>
+                <p id="lightboxDesc" style="color: var(--text-muted); font-size: 0.95rem;"></p>
+            </div>
+        </div>
+    </div>
 
     <footer id="contact">
         <div class="container">
@@ -247,11 +454,69 @@
     </footer>
 
     <script>
+        // 手機版選單
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
         mobileMenuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
         document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
 
+        // --------------------------------------------------
+        // 精選作品自動輪播（每 10 秒自動切換下一張）
+        // --------------------------------------------------
+        const worksTrack = document.getElementById('worksTrack');
+        const featuredSlides = document.querySelectorAll('.featured-slide');
+        const indicatorsContainer = document.getElementById('carouselIndicators');
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        const worksCarousel = document.getElementById('worksCarousel');
+
+        let slideIndex = 0;
+        const slideCount = featuredSlides.length;
+        let slideTimer;
+
+        // 自動產生對應數量的圓點指示器
+        featuredSlides.forEach((_, idx) => {
+            const dot = document.createElement('button');
+            dot.className = 'indicator-dot' + (idx === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `第 ${idx + 1} 張`);
+            dot.addEventListener('click', () => {
+                goToSlide(idx);
+                resetSlideTimer();
+            });
+            indicatorsContainer.appendChild(dot);
+        });
+
+        const indicatorDots = document.querySelectorAll('.indicator-dot');
+
+        function goToSlide(index) {
+            if (index < 0) slideIndex = slideCount - 1;
+            else if (index >= slideCount) slideIndex = 0;
+            else slideIndex = index;
+
+            worksTrack.style.transform = `translateX(-${slideIndex * 100}%)`;
+            indicatorDots.forEach((dot, i) => dot.classList.toggle('active', i === slideIndex));
+        }
+
+        function startSlideTimer() {
+            slideTimer = setInterval(() => {
+                goToSlide(slideIndex + 1);
+            }, 10000); // 10000 毫秒 = 每 10 秒自動換下一張
+        }
+
+        function resetSlideTimer() {
+            clearInterval(slideTimer);
+            startSlideTimer();
+        }
+
+        prevBtn.addEventListener('click', () => { goToSlide(slideIndex - 1); resetSlideTimer(); });
+        nextBtn.addEventListener('click', () => { goToSlide(slideIndex + 1); resetSlideTimer(); });
+        worksCarousel.addEventListener('mouseenter', () => clearInterval(slideTimer));
+        worksCarousel.addEventListener('mouseleave', startSlideTimer);
+        startSlideTimer();
+
+        // --------------------------------------------------
+        // 分類篩選按鈕功能（全部作品 / 課程成果 / 團體討論 / 校外參訪）
+        // --------------------------------------------------
         const filterBtns = document.querySelectorAll('.filter-btn');
         const workCards = document.querySelectorAll('.work-card');
         const emptyNotice = document.getElementById('emptyNotice');
@@ -277,6 +542,32 @@
                 if (visibleCount === 0) emptyNotice.classList.add('show');
                 else emptyNotice.classList.remove('show');
             });
+        });
+
+        // --------------------------------------------------
+        // 點擊卡片放大檢視功能
+        // --------------------------------------------------
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDesc = document.getElementById('lightboxDesc');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        workCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img');
+                const title = card.querySelector('.card-title').textContent;
+                const desc = card.querySelector('.card-desc').textContent;
+                lightboxImg.src = img.src;
+                lightboxTitle.textContent = title;
+                lightboxDesc.textContent = desc;
+                lightbox.classList.add('open');
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('open');
         });
     </script>
 </body>
