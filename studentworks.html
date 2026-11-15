@@ -63,10 +63,8 @@
         .page-header h1 { font-size: 2.3rem; font-weight: 700; margin-bottom: 12px; }
         .page-header p { font-size: 1.05rem; opacity: 0.9; max-width: 650px; margin: 0 auto; font-weight: 300; }
 
-        /* 焦點作品自動輪播區（每 10 秒自動切換） */
-        .featured-carousel-section {
-            margin: 45px auto 20px;
-        }
+        /* 精選作品自動輪播區（每 10 秒自動切換） */
+        .featured-carousel-section { margin: 45px auto 20px; }
         .featured-carousel {
             position: relative;
             width: 100%;
@@ -82,17 +80,8 @@
             height: 100%;
             transition: transform 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        .featured-slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        .featured-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .featured-slide { min-width: 100%; height: 100%; position: relative; }
+        .featured-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .featured-caption {
             position: absolute;
             bottom: 0;
@@ -107,15 +96,8 @@
             flex-wrap: wrap;
             gap: 15px;
         }
-        .featured-caption h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .featured-caption p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
+        .featured-caption h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+        .featured-caption p { font-size: 0.95rem; opacity: 0.9; }
         .featured-tag {
             background: var(--accent-color);
             color: var(--white);
@@ -321,7 +303,31 @@
                     </div>
                 </div>
 
-                <!-- 輪播第 2 張：visit-1.jpg -->
+                <!-- 輪播第 2 張：group-1.jpg -->
+                <div class="featured-slide">
+                    <img src="graph/group-1.jpg" onerror="this.onerror=null; this.src='graph/group-1.JPG';" alt="團體討論 1">
+                    <div class="featured-caption">
+                        <div>
+                            <span class="featured-tag">團體討論</span>
+                            <h2>個案研討與團隊腦力激盪</h2>
+                            <p>透過小組協作與翻轉教學討論，針對企業管理案例進行深度分析與策略提案。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 輪播第 3 張：group-2.jpg -->
+                <div class="featured-slide">
+                    <img src="graph/group-2.jpg" onerror="this.onerror=null; this.src='graph/group-2.JPG';" alt="團體討論 2">
+                    <div class="featured-caption">
+                        <div>
+                            <span class="featured-tag">團體討論</span>
+                            <h2>跨領域團隊合作與專案企劃</h2>
+                            <p>學生分組探討行銷與營運實務課題，培養溝通協調與團隊解決問題的能力。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 輪播第 4 張：visit-1.jpg -->
                 <div class="featured-slide">
                     <img src="graph/visit-1.jpg" onerror="this.onerror=null; this.src='graph/visit-1.JPG';" alt="校外參訪 1">
                     <div class="featured-caption">
@@ -365,6 +371,32 @@
                     </div>
                 </div>
 
+                <!-- 團體討論第 1 張：group-1.jpg -->
+                <div class="work-card" data-category="group">
+                    <div class="card-image-wrapper">
+                        <img src="graph/group-1.jpg" onerror="this.onerror=null; this.src='graph/group-1.JPG';" alt="團體討論 1">
+                        <span class="category-badge">團體討論</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">個案研討與團隊腦力激盪</h3>
+                        <div class="card-meta"><i class="fa-solid fa-users"></i> 經管系個案討論小組</div>
+                        <p class="card-desc">透過小組協作與翻轉教學討論，針對企業管理案例進行深度分析與策略提案。</p>
+                    </div>
+                </div>
+
+                <!-- 團體討論第 2 張：group-2.jpg -->
+                <div class="work-card" data-category="group">
+                    <div class="card-image-wrapper">
+                        <img src="graph/group-2.jpg" onerror="this.onerror=null; this.src='graph/group-2.JPG';" alt="團體討論 2">
+                        <span class="category-badge">團體討論</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">跨領域團隊合作與專案企劃</h3>
+                        <div class="card-meta"><i class="fa-solid fa-users"></i> 經管系專題企劃小組</div>
+                        <p class="card-desc">學生分組探討行銷與營運實務課題，培養溝通協調、邏輯思辨與團隊解決問題的能力。</p>
+                    </div>
+                </div>
+
                 <!-- 校外參訪第 1 張：visit-1.jpg -->
                 <div class="work-card" data-category="visit">
                     <div class="card-image-wrapper">
@@ -377,23 +409,6 @@
                         <p class="card-desc">走出教室深入在地特色空間與產業現場，透過實地觀摩與經營者面對面交流，將課堂理論與實務營運緊密結合。</p>
                     </div>
                 </div>
-
-                <!-- 
-                ====================================================================
-                📌 未來新增照片快速範本（上傳 group-1.jpg、course-2.jpg 等後複製貼上）：
-                ====================================================================
-                <div class="work-card" data-category="group">
-                    <div class="card-image-wrapper">
-                        <img src="graph/group-1.jpg" onerror="this.onerror=null; this.src='graph/group-1.JPG';" alt="團體討論 1">
-                        <span class="category-badge">團體討論</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">個案研討與團隊腦力激盪</h3>
-                        <div class="card-meta"><i class="fa-solid fa-users"></i> 經管系個案討論小組</div>
-                        <p class="card-desc">透過小組協作與翻轉教學討論，針對企業管理案例進行深度分析與策略提案。</p>
-                    </div>
-                </div>
-                -->
 
                 <div class="empty-notice" id="emptyNotice">
                     <i class="fa-regular fa-images"></i>
@@ -474,7 +489,6 @@
         const slideCount = featuredSlides.length;
         let slideTimer;
 
-        // 自動產生對應數量的圓點指示器
         featuredSlides.forEach((_, idx) => {
             const dot = document.createElement('button');
             dot.className = 'indicator-dot' + (idx === 0 ? ' active' : '');
@@ -500,7 +514,7 @@
         function startSlideTimer() {
             slideTimer = setInterval(() => {
                 goToSlide(slideIndex + 1);
-            }, 10000); // 10000 毫秒 = 每 10 秒自動換下一張
+            }, 10000);
         }
 
         function resetSlideTimer() {
