@@ -170,9 +170,68 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         .card-image-wrapper { position: relative; width: 100%; height: 310px; overflow: hidden; background-color: #e9ecef; }
-        .card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-        .work-card:hover .card-image-wrapper img { transform: scale(1.04); }
-        .category-badge { position: absolute; top: 16px; right: 16px; background: rgba(29, 43, 58, 0.9); backdrop-filter: blur(4px); color: var(--white); padding: 6px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .card-image-wrapper > img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .work-card:hover .card-image-wrapper > img { transform: scale(1.04); }
+        .category-badge { position: absolute; top: 16px; right: 16px; background: rgba(29, 43, 58, 0.9); backdrop-filter: blur(4px); color: var(--white); padding: 6px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 5; }
+
+        /* 卡片內部迷你輪播樣式（用於合併後的團體討論卡片） */
+        .mini-slider-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mini-slider-track img {
+            min-width: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .mini-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.45);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            cursor: pointer;
+            z-index: 6;
+            transition: var(--transition);
+        }
+        .mini-arrow:hover { background: var(--accent-color); }
+        .mini-arrow.prev { left: 12px; }
+        .mini-arrow.next { right: 12px; }
+        .mini-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 6;
+        }
+        .mini-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.55);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .mini-dot.active {
+            background: var(--white);
+            width: 20px;
+            border-radius: 4px;
+        }
 
         .card-body { padding: 28px 30px 32px; flex-grow: 1; display: flex; flex-direction: column; }
         .card-title { font-size: 1.35rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px; }
@@ -358,7 +417,7 @@
 
             <div class="works-grid" id="worksGrid">
                 
-                <!-- 課程成果第 1 張：course-1.jpg -->
+                <!-- 卡片 1：課程成果（course-1.jpg） -->
                 <div class="work-card" data-category="course">
                     <div class="card-image-wrapper">
                         <img src="graph/course-1.jpg" onerror="this.onerror=null; this.src='graph/course-1.JPG';" alt="課程成果 1">
@@ -371,33 +430,29 @@
                     </div>
                 </div>
 
-                <!-- 團體討論第 1 張：group-1.jpg -->
-                <div class="work-card" data-category="group">
+                <!-- 卡片 2：團體討論（合併 group-1.jpg 與 group-2.jpg，在卡片內自動輪播） -->
+                <div class="work-card" data-category="group" id="groupCard">
                     <div class="card-image-wrapper">
-                        <img src="graph/group-1.jpg" onerror="this.onerror=null; this.src='graph/group-1.JPG';" alt="團體討論 1">
+                        <div class="mini-slider-track" id="groupSliderTrack">
+                            <img src="graph/group-1.jpg" onerror="this.onerror=null; this.src='graph/group-1.JPG';" alt="團體討論 1">
+                            <img src="graph/group-2.jpg" onerror="this.onerror=null; this.src='graph/group-2.JPG';" alt="團體討論 2">
+                        </div>
                         <span class="category-badge">團體討論</span>
+                        <button type="button" class="mini-arrow prev" id="groupPrev" aria-label="上一張"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button type="button" class="mini-arrow next" id="groupNext" aria-label="下一張"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="mini-dots" id="groupDots">
+                            <button type="button" class="mini-dot active" data-idx="0" aria-label="第 1 張"></button>
+                            <button type="button" class="mini-dot" data-idx="1" aria-label="第 2 張"></button>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">個案研討與團隊腦力激盪</h3>
-                        <div class="card-meta"><i class="fa-solid fa-users"></i> 經管系個案討論小組</div>
-                        <p class="card-desc">透過小組協作與翻轉教學討論，針對企業管理案例進行深度分析與策略提案。</p>
+                        <h3 class="card-title">個案研討與跨領域團隊合作</h3>
+                        <div class="card-meta"><i class="fa-solid fa-users"></i> 經管系個案討論與企劃小組</div>
+                        <p class="card-desc">透過小組協作與翻轉教學討論，針對企業管理案例與行銷營運課題進行深度分析、腦力激盪與策略提案。</p>
                     </div>
                 </div>
 
-                <!-- 團體討論第 2 張：group-2.jpg -->
-                <div class="work-card" data-category="group">
-                    <div class="card-image-wrapper">
-                        <img src="graph/group-2.jpg" onerror="this.onerror=null; this.src='graph/group-2.JPG';" alt="團體討論 2">
-                        <span class="category-badge">團體討論</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">跨領域團隊合作與專案企劃</h3>
-                        <div class="card-meta"><i class="fa-solid fa-users"></i> 經管系專題企劃小組</div>
-                        <p class="card-desc">學生分組探討行銷與營運實務課題，培養溝通協調、邏輯思辨與團隊解決問題的能力。</p>
-                    </div>
-                </div>
-
-                <!-- 校外參訪第 1 張：visit-1.jpg -->
+                <!-- 卡片 3：校外參訪（visit-1.jpg） -->
                 <div class="work-card" data-category="visit">
                     <div class="card-image-wrapper">
                         <img src="graph/visit-1.jpg" onerror="this.onerror=null; this.src='graph/visit-1.JPG';" alt="校外參訪 1">
@@ -476,7 +531,7 @@
         document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
 
         // --------------------------------------------------
-        // 精選作品自動輪播（每 10 秒自動切換下一張）
+        // 1. 上方焦點作品大輪播（每 10 秒自動切換下一張）
         // --------------------------------------------------
         const worksTrack = document.getElementById('worksTrack');
         const featuredSlides = document.querySelectorAll('.featured-slide');
@@ -529,7 +584,58 @@
         startSlideTimer();
 
         // --------------------------------------------------
-        // 分類篩選按鈕功能（全部作品 / 課程成果 / 團體討論 / 校外參訪）
+        // 2. 「團體討論」合併卡片內部自動輪播（每 4 秒切換 2 張照片）
+        // --------------------------------------------------
+        const groupTrack = document.getElementById('groupSliderTrack');
+        const groupImgs = groupTrack.querySelectorAll('img');
+        const groupPrev = document.getElementById('groupPrev');
+        const groupNext = document.getElementById('groupNext');
+        const groupDots = document.querySelectorAll('#groupDots .mini-dot');
+        let groupIdx = 0;
+        let groupTimer;
+
+        function updateGroupSlider(idx) {
+            if (idx < 0) groupIdx = groupImgs.length - 1;
+            else if (idx >= groupImgs.length) groupIdx = 0;
+            else groupIdx = idx;
+
+            groupTrack.style.transform = `translateX(-${groupIdx * 100}%)`;
+            groupDots.forEach((d, i) => d.classList.toggle('active', i === groupIdx));
+        }
+
+        function startGroupTimer() {
+            groupTimer = setInterval(() => updateGroupSlider(groupIdx + 1), 4000);
+        }
+
+        function resetGroupTimer() {
+            clearInterval(groupTimer);
+            startGroupTimer();
+        }
+
+        groupPrev.addEventListener('click', (e) => {
+            e.stopPropagation(); // 避免觸發卡片放大燈箱
+            updateGroupSlider(groupIdx - 1);
+            resetGroupTimer();
+        });
+
+        groupNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            updateGroupSlider(groupIdx + 1);
+            resetGroupTimer();
+        });
+
+        groupDots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateGroupSlider(parseInt(dot.getAttribute('data-idx')));
+                resetGroupTimer();
+            });
+        });
+
+        startGroupTimer();
+
+        // --------------------------------------------------
+        // 3. 分類篩選按鈕功能（全部作品 / 課程成果 / 團體討論 / 校外參訪）
         // --------------------------------------------------
         const filterBtns = document.querySelectorAll('.filter-btn');
         const workCards = document.querySelectorAll('.work-card');
@@ -559,7 +665,7 @@
         });
 
         // --------------------------------------------------
-        // 點擊卡片放大檢視功能
+        // 4. 點擊卡片放大檢視功能（支援自動抓出輪播卡片當前顯示的照片）
         // --------------------------------------------------
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
@@ -569,10 +675,15 @@
 
         workCards.forEach(card => {
             card.addEventListener('click', () => {
-                const img = card.querySelector('img');
+                let targetImg;
+                if (card.id === 'groupCard') {
+                    targetImg = groupImgs[groupIdx];
+                } else {
+                    targetImg = card.querySelector('img');
+                }
                 const title = card.querySelector('.card-title').textContent;
                 const desc = card.querySelector('.card-desc').textContent;
-                lightboxImg.src = img.src;
+                lightboxImg.src = targetImg.src;
                 lightboxTitle.textContent = title;
                 lightboxDesc.textContent = desc;
                 lightbox.classList.add('open');
